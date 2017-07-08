@@ -16,5 +16,5 @@ $chrome->useMobileScreen();
 
 //not necessary to set window size
 $chrome->setWindowSize($width=768,$height=768);
-print $chrome->getScreenShot().PHP_EOL;
+print "Image successfully generated :".$chrome->getScreenShot().PHP_EOL;
 

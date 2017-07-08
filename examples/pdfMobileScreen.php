@@ -15,5 +15,5 @@ $chrome->setOutputDirectory(__DIR__);
 $chrome->useMobileScreen();
 //not necessary to set window size
 $chrome->setWindowSize($width=768,$height=768);
-print $chrome->getPdf().PHP_EOL;
+print "Pdf successfully generated :".$chrome->getPdf().PHP_EOL;
 

@@ -9,6 +9,7 @@
 namespace dawood\phpChrome;
 
 use mikehaertl\shellcommand\Command;
+use PHPUnit\Runner\Exception;
 
 class Chrome
 {
@@ -26,11 +27,11 @@ class Chrome
      */
     function __construct($url=null, $binaryPath=null)
     {
+        //some necessary default options
         $this->setArguments(
             [
                 '--headless'=>'',
                 '--disable-gpu'=>'',
-                '--hide-scrollbars'=>'',
                 '----timeout='=>'6000', //milliseconds
             ]
         );
@@ -57,7 +58,7 @@ class Chrome
         {
             throw new \Exception("No binary Bath Is provided");
         }
-        $this->binaryPath=$binaryPath;
+        $this->binaryPath=trim($binaryPath);
     }
 
     /**
@@ -80,7 +81,7 @@ class Chrome
      */
     public function setArgument($argument, $value)
     {
-        $this->arguments[$argument]=$value;
+        $this->arguments[trim($argument)]=trim($value);
     }
 
     /**
@@ -106,7 +107,7 @@ class Chrome
         {
             throw new \Exception('No url provided');
         }
-        $this->url=$url;
+        $this->url=trim($url);
     }
 
     /**
@@ -124,8 +125,11 @@ class Chrome
             '--print-to-pdf='=>$this->outPutDirectory.'/'.$pdfName,
         ];
         $allArguments=array_merge($printArray,$this->arguments);
-        $this->executeChrome($allArguments);
-        return "Pdf successfully generated :".$this->outPutDirectory.'/'.$pdfName;
+        if(!$this->executeChrome($allArguments))
+        {
+            throw new Exception("Some Error Occurred While Getting Pdf");
+        }
+        return $this->outPutDirectory.'/'.$pdfName;
     }
 
     /**
@@ -143,8 +147,11 @@ class Chrome
             '--screenshot='=>$this->outPutDirectory.'/'.$imageName,
         ];
         $allArguments=array_merge($printArray,$this->arguments);
-        $this->executeChrome($allArguments);
-        return "Image successfully generated :".$this->outPutDirectory.'/'.$imageName;
+        if(!$this->executeChrome($allArguments))
+        {
+            throw new Exception("Some Error Occurred While Getting Image");
+        }
+        return $this->outPutDirectory.'/'.$imageName;
     }
 
     /**
@@ -158,7 +165,7 @@ class Chrome
         {
             throw new \Exception('No url provided');
         }
-        $this->outPutDirectory=$directory;
+        $this->outPutDirectory=trim($directory);
     }
 
     /**
@@ -168,7 +175,6 @@ class Chrome
     private function executeChrome(array $arguments)
     {
         $command = new Command($this->binaryPath);
-
         foreach ($arguments as $argument=>$value)
         {
             $command->addArg($argument,$value?$value:null);
@@ -177,9 +183,10 @@ class Chrome
         if (!$command->execute())
         {
             echo $command->getError().PHP_EOL.'exit Code:'.$command->getExitCode();
-            die;
+            return false;
         }
         unset($command);
+        return true;
     }
 
     /**
@@ -213,5 +220,39 @@ class Chrome
     public function useMobileScreen()
     {
         $this->setArgument('--user-agent=','Mozilla/5.0 (Linux; U; Android 4.0.3; ko-kr; LG-L160L Build/IML74K) AppleWebkit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30');
+    }
+
+    /**
+     * return $this->url
+     * @return mixed
+     */
+    public function getUrl()
+    {
+        return $this->url;
+    }
+
+    /**
+     * return currently used binary path
+     * @return mixed
+     */
+    public function getBinaryPath()
+    {
+        return $this->binaryPath;
+    }
+
+    /**
+     * @return mixed arguments to use with chrome
+     */
+    public function getArguments()
+    {
+        return $this->arguments;
+    }
+
+    /**
+     * @return string the output directory to be used by chrome
+     */
+    public function getOutPutDirectory()
+    {
+        return $this->outPutDirectory;
     }
 }
