@@ -1,0 +1,22 @@
+{
+    "name": "dawood/chrome-pdf",
+    "description": "A slim PHP wrapper around google-chrome to convert url to pdf or to take screenshots , easy to use and clean OOP interface",
+    "type": "library",
+    "license": "MIT",
+    "keywords": ["shell","php","pdf","chrome","screenshots"],
+    "authors": [
+        {
+            "name": "Dawood Ikhlaq",
+            "email": "daudmalik06@gmail.com"
+        }
+    ],
+    "require": {
+        "mikehaertl/php-shellcommand": "^1.2",
+        "phpunit/phpunit": "^6.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "dawood\\phpChrome\\": "src/"
+        }
+    }
+}
