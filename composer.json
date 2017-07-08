@@ -10,6 +10,7 @@
             "email": "daudmalik06@gmail.com"
         }
     ],
+    "minimum-stability": "stable",
     "require": {
         "mikehaertl/php-shellcommand": "^1.2",
         "phpunit/phpunit": "^6.2"
