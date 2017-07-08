@@ -32,7 +32,6 @@ class Chrome
             [
                 '--headless'=>'',
                 '--disable-gpu'=>'',
-                '----timeout='=>'6000', //milliseconds
             ]
         );
         $this->outPutDirectory=__DIR__;
@@ -72,7 +71,7 @@ class Chrome
         {
             throw new \Exception("No binary Bath Is provided");
         }
-        $this->setArgument('user-data-dir=',$location);
+        $this->setArgument('user-data-dir',$location);
     }
     /**
      * add provided argument to $this->arguments array
@@ -81,7 +80,12 @@ class Chrome
      */
     public function setArgument($argument, $value)
     {
-        $this->arguments[trim($argument)]=trim($value);
+        $argument=trim($argument);
+        if(!empty($value) && !strstr($argument,'='))
+        {
+            $argument.='=';
+        }
+        $this->arguments[$argument]=trim($value);
     }
 
     /**
@@ -122,7 +126,7 @@ class Chrome
             $pdfName=rand().$pdfName;
         }
         $printArray=[
-            '--print-to-pdf='=>$this->outPutDirectory.'/'.$pdfName,
+            '--print-to-pdf'=>$this->outPutDirectory.'/'.$pdfName,
         ];
         $allArguments=array_merge($printArray,$this->arguments);
         if(!$this->executeChrome($allArguments))
@@ -144,7 +148,7 @@ class Chrome
             $imageName=rand().$imageName;
         }
         $printArray=[
-            '--screenshot='=>$this->outPutDirectory.'/'.$imageName,
+            '--screenshot'=>$this->outPutDirectory.'/'.$imageName,
         ];
         $allArguments=array_merge($printArray,$this->arguments);
         if(!$this->executeChrome($allArguments))
@@ -211,7 +215,7 @@ class Chrome
      */
     public function setWindowSize($width, $height)
     {
-        $this->setArgument('--window-size=',$width.','.$height);
+        $this->setArgument('--window-size',$width.','.$height);
     }
 
     /**
@@ -219,7 +223,7 @@ class Chrome
      */
     public function useMobileScreen()
     {
-        $this->setArgument('--user-agent=','Mozilla/5.0 (Linux; U; Android 4.0.3; ko-kr; LG-L160L Build/IML74K) AppleWebkit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30');
+        $this->setArgument('--user-agent','Mozilla/5.0 (Linux; U; Android 4.0.3; ko-kr; LG-L160L Build/IML74K) AppleWebkit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30');
     }
 
     /**

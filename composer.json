@@ -1,5 +1,5 @@
 {
-    "name": "dawood/chrome-pdf",
+    "name": "dawood/phpchromepdf",
     "description": "A slim PHP wrapper around google-chrome to convert url to pdf or to take screenshots , easy to use and clean OOP interface",
     "type": "library",
     "license": "MIT",

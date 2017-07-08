@@ -58,8 +58,8 @@ class ChromeTestSuite extends TestCase
     {
         $chrome=new Chrome;
         $chrome->setArgument('   test     ','           Nothing         ');
-        $this->assertArrayHasKey('test',$chrome->getArguments());
-        $this->assertEquals('Nothing',$chrome->getArguments()['test']);
+        $this->assertArrayHasKey('test=',$chrome->getArguments());
+        $this->assertEquals('Nothing',$chrome->getArguments()['test=']);
     }
 
     public function testSetUrl()
