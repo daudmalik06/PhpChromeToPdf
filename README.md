@@ -148,7 +148,8 @@ if your argument doesn't has values like `--headless` you can pass empty value
     you can use this method to change that
 * `setUrl` to set the url to convert to pdf or to take screenshot    
 
-* `setOutputDirectory` directory to save the output (screenshots and pdf)
+* `setOutputDirectory` directory to save the output (screenshots and pdf) the
+default directory is library/tmp
 
 * `getPdf` it will convert your provided url to pdf and return the 
 location of newly saved pdf
