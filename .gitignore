@@ -2,3 +2,4 @@
 vendor/
 *.swp
 .idea/
+tmp/

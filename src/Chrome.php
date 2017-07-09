@@ -34,7 +34,7 @@ class Chrome
                 '--disable-gpu'=>'',
             ]
         );
-        $this->outPutDirectory=__DIR__;
+        $this->setOutputDirectory(str_replace('src','tmp',realpath(__DIR__)));
         if(!$binaryPath)
         {
             $binaryPath='/usr/bin/google-chrome';
@@ -170,6 +170,10 @@ class Chrome
             throw new \Exception('No url provided');
         }
         $this->outPutDirectory=trim($directory);
+        if(!file_exists($directory))
+        {
+            @mkdir($directory);
+        }
     }
 
     /**
@@ -259,4 +263,5 @@ class Chrome
     {
         return $this->outPutDirectory;
     }
+
 }
