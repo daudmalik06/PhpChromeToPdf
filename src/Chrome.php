@@ -126,7 +126,7 @@ class Chrome
             $pdfName=rand().$pdfName;
         }
         $printArray=[
-            '--print-to-pdf'=>$this->outPutDirectory.'/'.$pdfName,
+            '--print-to-pdf='=>$this->outPutDirectory.'/'.$pdfName,
         ];
         $allArguments=array_merge($printArray,$this->arguments);
         if(!$this->executeChrome($allArguments))
@@ -148,7 +148,7 @@ class Chrome
             $imageName=rand().$imageName;
         }
         $printArray=[
-            '--screenshot'=>$this->outPutDirectory.'/'.$imageName,
+            '--screenshot='=>$this->outPutDirectory.'/'.$imageName,
         ];
         $allArguments=array_merge($printArray,$this->arguments);
         if(!$this->executeChrome($allArguments))
