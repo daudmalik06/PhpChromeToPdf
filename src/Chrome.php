@@ -32,6 +32,8 @@ class Chrome
             [
                 '--headless'=>'',
                 '--disable-gpu'=>'',
+                '--incognito'=>'',
+                '--enable-viewport'=>'',
             ]
         );
         $this->setOutputDirectory(str_replace('src','tmp',realpath(__DIR__)));
@@ -262,6 +264,20 @@ class Chrome
     public function getOutPutDirectory()
     {
         return $this->outPutDirectory;
+    }
+
+    /**
+     * set the provided file as current url with file:/// protocol
+     * @param string $file
+     * @throws \Exception if file not found
+     */
+    public function useHtmlFile($file)
+    {
+        if(!file_exists($file))
+        {
+            throw new \Exception("$file not found");
+        }
+        $this->setUrl("file:///".$file);
     }
 
 }

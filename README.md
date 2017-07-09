@@ -108,6 +108,36 @@ print "Image successfully generated :".$chrome->getScreenShot().PHP_EOL;
 
 ```
 
+### Take screenshot of Html File
+
+```php
+
+include '../vendor/autoload.php';
+
+use dawood\phpChrome\Chrome;
+
+$chrome=new Chrome(null,'/usr/bin/google-chrome');
+$chrome->useHtmlFile(__DIR__.'/index.html');
+print "Image successfully generated :".$chrome->getScreenShot().PHP_EOL;
+
+
+
+```
+
+### convert Html file to pdf 
+```php
+
+include '../vendor/autoload.php';
+
+use dawood\phpChrome\Chrome;
+
+$chrome=new Chrome(null,'/usr/bin/google-chrome');
+$chrome->useHtmlFile(__DIR__.'/index.html');
+print "Pdf successfully generated :".$chrome->getPdf().PHP_EOL;
+
+
+```
+
 
 
 ## Setting options
@@ -147,6 +177,8 @@ if your argument doesn't has values like `--headless` you can pass empty value
     it is not mandatory as google-chrome by default uses some directory but in need 
     you can use this method to change that
 * `setUrl` to set the url to convert to pdf or to take screenshot    
+
+* `useHtmlFile` to use the file instead of url to convert to pdf or to take screenshot    
 
 * `setOutputDirectory` directory to save the output (screenshots and pdf) the
 default directory is library/tmp

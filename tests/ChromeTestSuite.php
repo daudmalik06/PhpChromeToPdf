@@ -104,4 +104,14 @@ class ChromeTestSuite extends TestCase
         }
         unlink($file);
     }
+
+    public function testUseHtmlFile()
+    {
+        $chrome=new Chrome();
+        $htmlFile=__DIR__.'/index.html';
+        file_put_contents($htmlFile,"");
+        $chrome->useHtmlFile($htmlFile);
+        $this->assertEquals("file:///".$htmlFile,$chrome->getUrl());
+        @unlink($htmlFile);
+    }
 }
