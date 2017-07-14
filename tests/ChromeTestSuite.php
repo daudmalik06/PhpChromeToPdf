@@ -39,7 +39,7 @@ class ChromeTestSuite extends TestCase
     public function testSetBinaryPath()
     {
         $chrome = new Chrome();
-        $binaryPath='/usr/local/google-chrome';
+        $binaryPath='/usr/bin/google-chrome';
         $chrome->setBinaryPath($binaryPath);
         $this->assertEquals($binaryPath,$chrome->getBinaryPath());
     }
@@ -121,5 +121,13 @@ class ChromeTestSuite extends TestCase
         $htmlCode='<h1>hello world</h1>';
         $chrome->useHtml($htmlCode);
         $this->assertEquals("data:text/html,".rawurlencode($htmlCode),$chrome->getUrl());
+    }
+
+    public function testSetBinaryShouldThrowException()
+    {
+        $chrome = new Chrome();
+        $binaryPath='/usr/wrong/google-chrome';
+        $this->expectException(\Exception::class);
+        $chrome->setBinaryPath($binaryPath);
     }
 }
