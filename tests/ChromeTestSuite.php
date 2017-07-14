@@ -111,7 +111,7 @@ class ChromeTestSuite extends TestCase
         $htmlFile=__DIR__.'/index.html';
         file_put_contents($htmlFile,"");
         $chrome->useHtmlFile($htmlFile);
-        $this->assertEquals("file:///".$htmlFile,$chrome->getUrl());
+        $this->assertEquals("file://".$htmlFile,$chrome->getUrl());
         @unlink($htmlFile);
     }
 

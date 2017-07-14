@@ -129,7 +129,7 @@ class Chrome
         {
             $pdfPath.=".pdf";
         }
-        $pdfName=$this->returnUniqueName(".pdf");
+        $pdfName=$this->returnUniqueName("pdf");
         $printArray=[
             '--print-to-pdf='=>$pdfPath?$pdfPath:$this->outPutDirectory.'/'.$pdfName,
         ];
@@ -154,7 +154,7 @@ class Chrome
         {
             $imagePath.=".jpg";
         }
-        $imageName=$this->returnUniqueName(".jpg");
+        $imageName=$this->returnUniqueName("jpg");
         $printArray=[
             '--screenshot='=>$imagePath?$imagePath:$this->outPutDirectory.'/'.$imageName,
         ];
@@ -273,7 +273,7 @@ class Chrome
     }
 
     /**
-     * set the provided file as current url with file:/// protocol
+     * set the provided file as current url with file:// protocol
      * @param string $file
      * @throws \Exception if file not found
      */
@@ -283,7 +283,7 @@ class Chrome
         {
             throw new \Exception("$file not found");
         }
-        $this->setUrl("file:///".$file);
+        $this->setUrl("file://".$file);
     }
 
     /**
