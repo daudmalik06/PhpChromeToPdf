@@ -1,6 +1,11 @@
 PHP ChromeToPdf
 ===============
 
+[![Latest Stable Version](https://poser.pugx.org/dawood/phpchromepdf/v/stable.svg)](https://packagist.org/packages/dawood/phpchromepdf)
+[![Total Downloads](https://poser.pugx.org/dawood/phpchromepdf/downloads)](https://packagist.org/packages/dawood/phpchromepdf)
+[![License](https://poser.pugx.org/dawood/phpchromepdf/license.svg)](https://packagist.org/packages/dawood/phpchromepdf)
+
+
 PHP ChromeToPdf provides a simple and clean interface to ease PDF and image creation with
 [Google Chrome](https://www.google.com/chrome/). **The `Google Chrome`
 must be installed and working on your system.** See the section below for details.
@@ -11,17 +16,16 @@ must be installed and working on your system.** See the section below for detail
 Every time i had convert url to pdf or to take screenshot of some url
 i had to install several libraries , i know there are very good libraries available 
 like phantomJs,wkhtmltopdf and some others...
-but there are always rendering issue 
-<br>like some supports <b>bootstrap</b> ,some not some time <b>html5 problem</b> etc..
-<br>and this was all annoying
-so i decided to make this little wrapper around chrome 
-<br>
-by using chrome results i achieved following results.
-<ul><b>No more css issues (bootstrap,css3 )</b></ul>
-<ul><b>No more html5 issues</b></ul>
-<ul><b>No more need to use xvfb</b></ul>
+but there are always rendering issue  
+like some supports **bootstrap** ,some not some time **html5 problem** etc..  
+and this was all annoying
+so i decided to make this little wrapper around chrome  
+by using chrome results i achieved following results.  
+* **No more css issues (bootstrap,css3 )**
+* **No more html5 issues**
+* **No more need to use xvfb**
 
-<b>in-fact painless conversion</b>
+**in-fact painless conversion**
 
 
 ## Installation
@@ -227,7 +231,7 @@ then try running `google-chrome` from shell to verify it's installation
 
 
 ## License 
-The <b>PhpChromeToPdf</b> is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+The **PhpChromeToPdf** is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 
 ## Contribution
 Thanks to all of the contributors ,
