@@ -151,10 +151,24 @@ include '../vendor/autoload.php';
 use dawood\phpChrome\Chrome;
 
 $chrome=new Chrome(null,'/usr/bin/google-chrome');
-$chrome->useHtml("<h2>I am test Pdf</h2>");
-//can also call getScreenShot method
+$chrome->useHtml("<h2>I am test html</h2>");
 print "Pdf successfully generated :".$chrome->getPdf().PHP_EOL;
 print "screenShot successfully generated :".$chrome->getScreenShot().PHP_EOL;
+
+
+```
+
+### convert Html code to pdf / screenshot and save at desired location
+```php
+
+include '../vendor/autoload.php';
+
+use dawood\phpChrome\Chrome;
+
+$chrome=new Chrome(null,'/usr/bin/google-chrome');
+$chrome->useHtml("<h2>I am test html</h2>");
+print "Pdf successfully generated :".$chrome->getPdf("/tmp/mypdf.pdf").PHP_EOL;
+print "screenShot successfully generated :".$chrome->getScreenShot("/tmp/hello/test.jpg").PHP_EOL;
 
 
 ```
@@ -204,12 +218,20 @@ if your argument doesn't has values like `--headless` you can pass empty value
 * `useHtml` to use the html code instead of url to convert to pdf or to take screenshot    
 
 * `setOutputDirectory` directory to save the output (screenshots and pdf) the
-default directory is library/tmp
+default directory is tmporary directory of your operating system
 
-* `getPdf` it will convert your provided url to pdf and return the 
+* `getPdf` it receives optional path parameter to save the pdf file at 
+if not provided it will save in output directory or temp directory of your 
+operating system depending if you properly set up the output directory,  
+for this check `setOutputDirectory` option,  
+it will convert your provided url to pdf and return the 
 location of newly saved pdf
 
-* `getScreenShot` it will take screenshot of your provided url and return the 
+* `getScreenShot` it receives optional path parameter to save the pdf file at 
+if not provided it will save in output directory or temp directory of your 
+operating system depending if you properly set up the output directory  
+for this check `setOutputDirectory` option,  
+it will take screenshot of your provided url and return the 
 location of newly saved image
 
 * `setWindowSize` you can set the chrome window size using this method 

@@ -118,46 +118,52 @@ class Chrome
 
     /**
      * convert the provided url to pdf and return the pdf's location
+     * @param string|null $pdfPath desired location and file to save the pdf file
+     * e.g /home/my.pdf
      * @return string
+     * @throws \Exception
      */
-    public function getPdf()
+    public function getPdf($pdfPath=null)
     {
-        $pdfName=md5(time().mt_rand()).'.pdf';
-        while(!$this->UniqueName($pdfName))
+        if($pdfPath && !strstr($pdfPath,".pdf"))
         {
-            $pdfName=rand().$pdfName;
+            $pdfPath.=".pdf";
         }
+        $pdfName=$this->returnUniqueName(".pdf");
         $printArray=[
-            '--print-to-pdf='=>$this->outPutDirectory.'/'.$pdfName,
+            '--print-to-pdf='=>$pdfPath?$pdfPath:$this->outPutDirectory.'/'.$pdfName,
         ];
         $allArguments=array_merge($printArray,$this->arguments);
         if(!$this->executeChrome($allArguments))
         {
             throw new \Exception("Some Error Occurred While Getting Pdf");
         }
-        return $this->outPutDirectory.'/'.$pdfName;
+        return $pdfPath?$pdfPath:$this->outPutDirectory.'/'.$pdfName;
     }
 
     /**
      * convert the provided url to image and return the image's location
+     * @param string|null $imagePath $ImagePath desired location and file to save the screenshot file
+     * e.g /home/my.jpg
      * @return string
+     * @throws \Exception
      */
-    public function getScreenShot()
+    public function getScreenShot($imagePath=null)
     {
-        $imageName=md5(time().mt_rand()).'.jpg';
-        while(!$this->UniqueName($imageName))
+        if($imagePath && !strstr($imagePath,".jpg") && !strstr($imagePath,".png"))
         {
-            $imageName=rand().$imageName;
+            $imagePath.=".jpg";
         }
+        $imageName=$this->returnUniqueName(".jpg");
         $printArray=[
-            '--screenshot='=>$this->outPutDirectory.'/'.$imageName,
+            '--screenshot='=>$imagePath?$imagePath:$this->outPutDirectory.'/'.$imageName,
         ];
         $allArguments=array_merge($printArray,$this->arguments);
         if(!$this->executeChrome($allArguments))
         {
             throw new \Exception("Some Error Occurred While Getting Image");
         }
-        return $this->outPutDirectory.'/'.$imageName;
+        return $imagePath?$imagePath:$this->outPutDirectory.'/'.$imageName;
     }
 
     /**
@@ -305,6 +311,16 @@ class Chrome
         {
             throw new \Exception("there is problem in running provided chrome's binary Error message is :".$command->getError());
         }
+    }
+
+    private function returnUniqueName($extension)
+    {
+        $uniqueName=md5(time().mt_rand()).'.'.$extension;
+        while(!$this->UniqueName($uniqueName))
+        {
+            $uniqueName=rand().$uniqueName;
+        }
+        return $uniqueName;
     }
 
 }

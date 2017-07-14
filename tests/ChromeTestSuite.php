@@ -130,4 +130,20 @@ class ChromeTestSuite extends TestCase
         $this->expectException(\Exception::class);
         $chrome->setBinaryPath($binaryPath);
     }
+
+    public function testPdfPath()
+    {
+        $chrome=new Chrome();
+        $pdfLocation=$chrome->getPdf('/tmp/test');
+        $this->deleteFile($pdfLocation);
+        $this->assertEquals("/tmp/test.pdf",$pdfLocation);
+    }
+
+    public function testScreenShotPath()
+    {
+        $chrome=new Chrome();
+        $imageLocation=$chrome->getScreenShot("/tmp/jan");
+        $this->deleteFile($imageLocation);
+        $this->assertEquals("/tmp/jan.jpg",$imageLocation);
+    }
 }
