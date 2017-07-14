@@ -280,4 +280,18 @@ class Chrome
         $this->setUrl("file:///".$file);
     }
 
+    /**
+     * allow using html code to be converted to pdf or to take screenshot
+     * @param string|null $html
+     * @throws \Exception
+     */
+    public function useHtml($html=null)
+    {
+        if(!$html)
+        {
+            throw new \Exception("No html provided");
+        }
+        $this->setUrl('data:text/html,' . rawurlencode($html));
+    }
+
 }

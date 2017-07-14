@@ -143,6 +143,23 @@ print "Pdf successfully generated :".$chrome->getPdf().PHP_EOL;
 ```
 
 
+### convert Html code to pdf / screenshot 
+```php
+
+include '../vendor/autoload.php';
+
+use dawood\phpChrome\Chrome;
+
+$chrome=new Chrome(null,'/usr/bin/google-chrome');
+$chrome->useHtml("<h2>I am test Pdf</h2>");
+//can also call getScreenShot method
+print "Pdf successfully generated :".$chrome->getPdf().PHP_EOL;
+print "screenShot successfully generated :".$chrome->getScreenShot().PHP_EOL;
+
+
+```
+
+
 
 ## Setting options
 
@@ -183,6 +200,8 @@ if your argument doesn't has values like `--headless` you can pass empty value
 * `setUrl` to set the url to convert to pdf or to take screenshot    
 
 * `useHtmlFile` to use the file instead of url to convert to pdf or to take screenshot    
+
+* `useHtml` to use the html code instead of url to convert to pdf or to take screenshot    
 
 * `setOutputDirectory` directory to save the output (screenshots and pdf) the
 default directory is library/tmp

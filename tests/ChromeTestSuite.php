@@ -114,4 +114,12 @@ class ChromeTestSuite extends TestCase
         $this->assertEquals("file:///".$htmlFile,$chrome->getUrl());
         @unlink($htmlFile);
     }
+
+    public function testUseHtmlCode()
+    {
+        $chrome=new Chrome();
+        $htmlCode='<h1>hello world</h1>';
+        $chrome->useHtml($htmlCode);
+        $this->assertEquals("data:text/html,".rawurlencode($htmlCode),$chrome->getUrl());
+    }
 }
