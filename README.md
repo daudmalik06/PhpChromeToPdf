@@ -192,7 +192,7 @@ https://peter.sh/experiments/chromium-command-line-switches/
  is uses default location `/usr/bin/google-chrome`
  but you still can provide binary path later using `setBinaryPath`,
  constructor also put some default arguments like 
- `headless , disable-gpu` which are necessary for google-chrom to work on cli
+ `headless , disable-gpu` which are necessary for google-chrome to work on cli
  * `setBinaryPath` which accepts binary path and set it for you
  * `setArguments` to set options of google-chrome it accepts array of options in a format
  ```
@@ -218,7 +218,7 @@ if your argument doesn't has values like `--headless` you can pass empty value
 * `useHtml` to use the html code instead of url to convert to pdf or to take screenshot    
 
 * `setOutputDirectory` directory to save the output (screenshots and pdf) the
-default directory is tmporary directory of your operating system
+default directory is temporary directory of your operating system
 
 * `getPdf` it receives optional path parameter to save the pdf file at 
 if not provided it will save in output directory or temp directory of your 
