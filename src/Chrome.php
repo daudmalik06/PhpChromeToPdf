@@ -9,7 +9,6 @@
 namespace dawood\phpChrome;
 
 use mikehaertl\shellcommand\Command;
-use PHPUnit\Runner\Exception;
 
 class Chrome
 {
@@ -60,6 +59,7 @@ class Chrome
             throw new \Exception("No binary Bath Is provided");
         }
         $this->binaryPath=trim($binaryPath);
+        $this->abortIfChromeIsNotInstalled();
     }
 
     /**
@@ -133,7 +133,7 @@ class Chrome
         $allArguments=array_merge($printArray,$this->arguments);
         if(!$this->executeChrome($allArguments))
         {
-            throw new Exception("Some Error Occurred While Getting Pdf");
+            throw new \Exception("Some Error Occurred While Getting Pdf");
         }
         return $this->outPutDirectory.'/'.$pdfName;
     }
@@ -155,7 +155,7 @@ class Chrome
         $allArguments=array_merge($printArray,$this->arguments);
         if(!$this->executeChrome($allArguments))
         {
-            throw new Exception("Some Error Occurred While Getting Image");
+            throw new \Exception("Some Error Occurred While Getting Image");
         }
         return $this->outPutDirectory.'/'.$imageName;
     }
@@ -292,6 +292,19 @@ class Chrome
             throw new \Exception("No html provided");
         }
         $this->setUrl('data:text/html,' . rawurlencode($html));
+    }
+
+    /**
+     * @throws \Exception if the provided chrome's binary is not available/installed
+     */
+    private function abortIfChromeIsNotInstalled()
+    {
+        $command = new Command(trim($this->binaryPath.' --version'));
+        $command->execute();
+        if($command->getError() && (!strstr($command->getError(),"Google Chrome") || !strstr($command->getError(),"Chromium")))
+        {
+            throw new \Exception("there is problem in running provided chrome's binary Error message is :".$command->getError());
+        }
     }
 
 }
