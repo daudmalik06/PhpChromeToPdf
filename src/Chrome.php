@@ -35,7 +35,7 @@ class Chrome
                 '--enable-viewport'=>'',
             ]
         );
-        $this->setOutputDirectory(str_replace('src','tmp',realpath(__DIR__)));
+        $this->setOutputDirectory(sys_get_temp_dir());
         if(!$binaryPath)
         {
             $binaryPath='/usr/bin/google-chrome';
