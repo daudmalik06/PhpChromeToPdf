@@ -92,6 +92,24 @@ class ChromeTestSuite extends TestCase
         $this->assertNotEmpty($imageLocation);
     }
 
+	/**
+	 * @expectedException \Exception
+	 */
+    public function testDownloadPdf()
+    {
+        $chrome=new Chrome();
+		$chrome->downloadPdf();
+    }
+
+	/**
+	 * @expectedException \Exception
+	 */
+    public function testDownloadScreenShot()
+    {
+        $chrome=new Chrome();
+		$chrome->downloadScreenShot();
+    }
+
     /**
      * deletes provided file
      * @param string $file
