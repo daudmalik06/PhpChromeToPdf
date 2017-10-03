@@ -3,3 +3,4 @@ vendor/
 *.swp
 .idea/
 tmp/
+composer.lock

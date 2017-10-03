@@ -248,14 +248,7 @@ there are some other getters available too in case you need
 
 
 
-## Note for Windows users
-until now i can't properly test this on windows so if you wanna try
-please try it and if it goes successful please send me a pull request 
-Thanks
-
-
-
-## Installation of google-Chrome
+## Installation of google-Chrome (linux/mac )
 ```shell
 wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add - 
 sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
@@ -268,8 +261,20 @@ sudo apt-get install -y google-chrome-stable
 sudo ln -s /usr/lib/x86_64-linux-gnu/libOSMesa.so.6 /opt/google/chrome/libosmesa.so
 
 ```
+
 then try running `google-chrome` from shell to verify it's installation
 
+
+
+## Installation of google-Chrome (Windows)
+```
+Just Install updated version of chrome(after V 61.*)  
+that-s it
+```
+
+then try running `C:\Program Files (x86)\Google\Chrome\Application>chrome.exe --headless` from cmd terminal to verify it's installation  
+
+> Note  the path of chrome directory can be different in your case  
 
 ## License 
 The **PhpChromeToPdf** is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
