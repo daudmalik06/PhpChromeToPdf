@@ -2,15 +2,8 @@
 use dawood\phpChrome\Chrome;
 use PHPUnit\Framework\TestCase;
 
-/**
- * Created by PhpStorm.
- * User: dawood Ikhlaq
- * Date: 7/8/2017
- * Time: 6:02 PM
- */
 class ChromeTestSuite extends TestCase
 {
-
     public function testChromeConstructorProperlySettingValues()
     {
         $url = 'http://example.com';
@@ -39,55 +32,55 @@ class ChromeTestSuite extends TestCase
     public function testSetBinaryPath()
     {
         $chrome = new Chrome();
-        $binaryPath='/usr/bin/google-chrome';
+        $binaryPath = '/usr/bin/google-chrome';
         $chrome->setBinaryPath($binaryPath);
         $this->assertEquals($binaryPath,$chrome->getBinaryPath());
     }
 
     public function testSetChromeDirectory()
     {
-        $chrome=new Chrome();
-        $userDirectory='/usr/tmp';
+        $chrome = new Chrome();
+        $userDirectory = '/usr/tmp';
         $chrome->setChromeDirectory($userDirectory);
-        $chromeArguments=$chrome->getArguments();
-        $this->assertArrayHasKey('user-data-dir=',$chromeArguments);
-        $this->assertEquals($userDirectory,$chromeArguments['user-data-dir=']);
+        $chromeArguments = $chrome->getArguments();
+        $this->assertArrayHasKey('user-data-dir=', $chromeArguments);
+        $this->assertEquals($userDirectory, $chromeArguments['user-data-dir=']);
     }
 
     public function testSetArgument()
     {
-        $chrome=new Chrome;
+        $chrome = new Chrome;
         $chrome->setArgument('   test     ','           Nothing         ');
-        $this->assertArrayHasKey('test=',$chrome->getArguments());
-        $this->assertEquals('Nothing',$chrome->getArguments()['test=']);
+        $this->assertArrayHasKey('test=', $chrome->getArguments());
+        $this->assertEquals('Nothing', $chrome->getArguments()['test=']);
     }
 
     public function testSetUrl()
     {
-        $chrome=new Chrome();
-        $chrome->setUrl('http://google.com  ');
-        $this->assertEquals('http://google.com',$chrome->getUrl());
+        $chrome = new Chrome();
+        $chrome->setUrl('http://google.com');
+        $this->assertEquals('http://google.com', $chrome->getUrl());
     }
 
     public function testSetOutputDirectory()
     {
-        $chrome=new Chrome();
-        $chrome->setOutputDirectory('/usr/home/   ');
-        $this->assertEquals('/usr/home/',$chrome->getOutPutDirectory());
+        $chrome = new Chrome();
+        $chrome->setOutputDirectory('/usr/home/');
+        $this->assertEquals('/usr/home/', $chrome->getOutputDirectory());
     }
 
     public function testGetPdf()
     {
-        $chrome=new Chrome();
-        $pdfLocation=$chrome->getPdf();
+        $chrome = new Chrome();
+        $pdfLocation = $chrome->getPdf();
         $this->deleteFile($pdfLocation);
         $this->assertNotEmpty($pdfLocation);
     }
 
     public function testGetScreenshot()
     {
-        $chrome=new Chrome();
-        $imageLocation=$chrome->getScreenShot();
+        $chrome = new Chrome();
+        $imageLocation = $chrome->getScreenShot();
         $this->deleteFile($imageLocation);
         $this->assertNotEmpty($imageLocation);
     }
@@ -98,52 +91,53 @@ class ChromeTestSuite extends TestCase
      */
     private function deleteFile($file)
     {
-        if(!file_exists($file))
+        if (!file_exists($file))
         {
             return false;
         }
+
         unlink($file);
     }
 
     public function testUseHtmlFile()
     {
-        $chrome=new Chrome();
-        $htmlFile=__DIR__.'/index.html';
-        file_put_contents($htmlFile,"");
+        $chrome = new Chrome();
+        $htmlFile = __DIR__ . '/index.html';
+        file_put_contents($htmlFile, '');
         $chrome->useHtmlFile($htmlFile);
-        $this->assertEquals("file://".$htmlFile,$chrome->getUrl());
+        $this->assertEquals("file://" . $htmlFile, $chrome->getUrl());
         @unlink($htmlFile);
     }
 
     public function testUseHtmlCode()
     {
-        $chrome=new Chrome();
-        $htmlCode='<h1>hello world</h1>';
+        $chrome = new Chrome();
+        $htmlCode = '<h1>hello world</h1>';
         $chrome->useHtml($htmlCode);
-        $this->assertEquals("data:text/html,".rawurlencode($htmlCode),$chrome->getUrl());
+        $this->assertEquals("data:text/html," . rawurlencode($htmlCode), $chrome->getUrl());
     }
 
     public function testSetBinaryShouldThrowException()
     {
         $chrome = new Chrome();
-        $binaryPath='/usr/wrong/google-chrome';
+        $binaryPath = '/usr/wrong/google-chrome';
         $this->expectException(\Exception::class);
         $chrome->setBinaryPath($binaryPath);
     }
 
     public function testPdfPath()
     {
-        $chrome=new Chrome();
-        $pdfLocation=$chrome->getPdf('/tmp/test');
+        $chrome = new Chrome();
+        $pdfLocation = $chrome->getPdf('/tmp/test');
         $this->deleteFile($pdfLocation);
-        $this->assertEquals("/tmp/test.pdf",$pdfLocation);
+        $this->assertEquals("/tmp/test.pdf", $pdfLocation);
     }
 
     public function testScreenShotPath()
     {
-        $chrome=new Chrome();
-        $imageLocation=$chrome->getScreenShot("/tmp/jan");
+        $chrome = new Chrome();
+        $imageLocation = $chrome->getScreenShot("/tmp/jan");
         $this->deleteFile($imageLocation);
-        $this->assertEquals("/tmp/jan.jpg",$imageLocation);
+        $this->assertEquals("/tmp/jan.jpg", $imageLocation);
     }
 }
