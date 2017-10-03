@@ -22,4 +22,8 @@ Look for a project's contribution instructions. If there are any, follow them.
 - Once the pull request is approved and merged you can pull the changes from `upstream` to your local repo and delete
 your extra branch(es).
 
-## Thanks
+## Coding Standard
+
+we follow [PSR-2](http://www.php-fig.org/psr/psr-2/)
+
+### Thanks 
