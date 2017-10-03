@@ -166,6 +166,32 @@ class Chrome
         return $imagePath?$imagePath:$this->outPutDirectory.'/'.$imageName;
     }
 
+	/**
+	 * Download pdf
+	 *
+     * @param string|null $pdfPath desired location and file to save the pdf file
+     * e.g /home/my.pdf
+	 * @return file
+	 * @throws \Exception
+	 */
+	public function downloadPdf($pdfPath=null)
+	{
+		return $this->download($this->getPdf($pdfPath));
+	}
+
+	/**
+	 * Download screenshot
+	 *
+     * @param string|null $imagePath desired location and file to save the screenshot file
+     * e.g /home/my.jpg
+	 * @return file
+	 * @throws \Exception
+	 */
+	public function downloadScreenShot($imagePath=null)
+	{
+		return $this->download($this->getScreenShot($imagePath));
+	}
+
     /**
      * set the output directory to save the pdf and screenshotss
      * @param null $directory
@@ -182,6 +208,30 @@ class Chrome
         {
             @mkdir($directory);
         }
+    }
+
+    /**
+     * Download file to browser
+     *
+     * @param string $path path to download from
+     * @return file pdf or image that is downloaded
+     * @throws \Exception
+     */
+    private function download($path)
+    {
+        if (!file_exists($path)) {
+            throw new \Exception($path.' does not exist or is not readable');
+        }
+
+		if (PHP_SAPI === 'cli') {
+			throw new \Exception('Cannot download from CLI');
+		}
+
+        header('Content-Description: File Transfer');
+        header('Content-Disposition: attachment; filename="'.basename($path).'"');
+        header('Pragma: public');
+        header('Content-Length: ' . filesize($path));
+        readfile($path);
     }
 
     /**
