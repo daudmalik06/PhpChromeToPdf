@@ -280,8 +280,8 @@ then try running `C:\Program Files (x86)\Google\Chrome\Application>chrome.exe --
 The **PhpChromeToPdf** is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 
 ## Contribution
-Thanks to all of the contributors ,
-fork this repository and send me a pull request
+Thanks to all of the contributors ,  
+Check [Contribution](CONTRIBUTING.md) for contribution rules
 
 ## Author
 Dawood Ikhlaq and Open source community
