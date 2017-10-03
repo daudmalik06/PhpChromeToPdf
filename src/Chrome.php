@@ -5,8 +5,9 @@
  * Date: 7/6/2017
  * Time: 10:53 PM
  */
-
 namespace dawood\phpChrome;
+
+$config = include "config.php";
 
 use mikehaertl\shellcommand\Command;
 
@@ -38,7 +39,7 @@ class Chrome
         $this->setOutputDirectory(sys_get_temp_dir());
         if(!$binaryPath)
         {
-            $binaryPath='/usr/bin/google-chrome';
+            $binaryPath=$config['binaryPath'];
         }
         $this->setBinaryPath($binaryPath);
         if($url)
@@ -152,7 +153,7 @@ class Chrome
     {
         if($imagePath && !strstr($imagePath,".jpg") && !strstr($imagePath,".png"))
         {
-            $imagePath.=".jpg";
+            $imagePath.=$config['defaultExtension'];
         }
         $imageName=$this->returnUniqueName("jpg");
         $printArray=[
