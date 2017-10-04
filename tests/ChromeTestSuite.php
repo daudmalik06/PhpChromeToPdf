@@ -4,13 +4,14 @@ use PHPUnit\Framework\TestCase;
 
 class ChromeTestSuite extends TestCase
 {
+    protected $binaryPath = '/usr/bin/google-chrome';
+    
     public function testChromeConstructorProperlySettingValues()
     {
         $url = 'http://example.com';
-        $binaryPath = '/usr/bin/google-chrome';
-        $chrome = new Chrome($url, $binaryPath);
+        $chrome = new Chrome($url, $this->binaryPath);
         $this->assertEquals($url, $chrome->getUrl());
-        $this->assertEquals($binaryPath, $chrome->getBinaryPath());
+        $this->assertEquals($this->binaryPath, $chrome->getBinaryPath());
     }
 
     public function testSetArguments()
@@ -22,7 +23,9 @@ class ChromeTestSuite extends TestCase
             '----timeout=' => '6000',
         ];
         $chrome = new Chrome();
+        $chrome->setBinaryPath($this->binaryPath);
         $chrome->setArguments($arguments);
+
         foreach ($arguments as $argument => $value) {
             $this->assertArrayHasKey($argument, $chrome->getArguments());
             $this->assertEquals($value, $chrome->getArguments()[$argument]);
@@ -32,9 +35,8 @@ class ChromeTestSuite extends TestCase
     public function testSetBinaryPath()
     {
         $chrome = new Chrome();
-        $binaryPath = '/usr/bin/google-chrome';
-        $chrome->setBinaryPath($binaryPath);
-        $this->assertEquals($binaryPath,$chrome->getBinaryPath());
+        $chrome->setBinaryPath($this->binaryPath);
+        $this->assertEquals($this->binaryPath,$chrome->getBinaryPath());
     }
 
     public function testSetChromeDirectory()
@@ -72,6 +74,8 @@ class ChromeTestSuite extends TestCase
     public function testGetPdf()
     {
         $chrome = new Chrome();
+        $chrome->setBinaryPath($this->binaryPath);
+
         $pdfLocation = $chrome->getPdf();
         $this->deleteFile($pdfLocation);
         $this->assertNotEmpty($pdfLocation);
@@ -80,6 +84,8 @@ class ChromeTestSuite extends TestCase
     public function testGetScreenshot()
     {
         $chrome = new Chrome();
+        $chrome->setBinaryPath($this->binaryPath);
+
         $imageLocation = $chrome->getScreenShot();
         $this->deleteFile($imageLocation);
         $this->assertNotEmpty($imageLocation);
@@ -128,6 +134,8 @@ class ChromeTestSuite extends TestCase
     public function testPdfPath()
     {
         $chrome = new Chrome();
+        $chrome->setBinaryPath($this->binaryPath);
+
         $pdfLocation = $chrome->getPdf('/tmp/test');
         $this->deleteFile($pdfLocation);
         $this->assertEquals("/tmp/test.pdf", $pdfLocation);
@@ -136,6 +144,8 @@ class ChromeTestSuite extends TestCase
     public function testScreenShotPath()
     {
         $chrome = new Chrome();
+        $chrome->setBinaryPath($this->binaryPath);
+
         $imageLocation = $chrome->getScreenShot("/tmp/jan");
         $this->deleteFile($imageLocation);
         $this->assertEquals("/tmp/jan.jpg", $imageLocation);

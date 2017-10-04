@@ -36,7 +36,7 @@ class Chrome
      * @param string $url           The url to convert to a pdf
      * @param string $binaryPath    Location of google-chrome installed on your machine
      */
-    function __construct($url, $binaryPath = '/usr/bin/google-chrome')
+    function __construct($url = '', $binaryPath = '')
     {
         // Set default options
         $this->setArguments([
@@ -47,7 +47,10 @@ class Chrome
         ]);
 
         $this->setOutputDirectory(sys_get_temp_dir());
-        $this->setBinaryPath($binaryPath);
+
+        if ($binaryPath) {
+            $this->setBinaryPath($binaryPath);
+        }
 
         if ($url) {
             $this->setUrl($url);
@@ -115,11 +118,11 @@ class Chrome
     /**
      * Convert the provided URL to a PDF and return its location
      *
-     * @param string $pdfPath   The path to the PDF
+     * @param null|string $pdfPath   The path to the PDF
      * @return string
      * @throws Exception
      */
-    public function getPdf($pdfPath)
+    public function getPdf($pdfPath = null)
     {
         if ($pdfPath && !strstr($pdfPath, '.pdf')) {
             $pdfPath .= '.pdf';
@@ -142,12 +145,12 @@ class Chrome
     /**
      * Convert the provided url to image and return the image's location
      *
-     * @param string $imagePath desired location and file to save the screenshot file
+     * @param null|string $imagePath desired location and file to save the screenshot file
      * e.g /home/my.jpg
      * @return string
      * @throws Exception
      */
-    public function getScreenShot($imagePath)
+    public function getScreenShot($imagePath = null)
     {
         if ($imagePath && !strstr($imagePath, '.jpg') && !strstr($imagePath, '.png')) {
             $imagePath .= '.jpg';
