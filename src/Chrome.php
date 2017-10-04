@@ -36,12 +36,15 @@ class Chrome
             ]
         );
         $this->setOutputDirectory(sys_get_temp_dir());
-        if(!$binaryPath)
+        
+        if (!$binaryPath)
         {
-            $binaryPath='/usr/bin/google-chrome';
+            $binaryPath = '/usr/bin/google-chrome';
         }
+        
         $this->setBinaryPath($binaryPath);
-        if($url)
+        
+        if ($url)
         {
             $this->setUrl($url);
         }
@@ -52,13 +55,13 @@ class Chrome
      * @param null|string $binaryPath
      * @throws \Exception
      */
-    public function setBinaryPath($binaryPath=null)
+    public function setBinaryPath($binaryPath = null)
     {
-        if(!$binaryPath)
+        if (!$binaryPath)
         {
             throw new \Exception("No binary Bath Is provided");
         }
-        $this->binaryPath=trim($binaryPath);
+        $this->binaryPath = trim($binaryPath);
         $this->abortIfChromeIsNotInstalled();
     }
 
@@ -67,12 +70,13 @@ class Chrome
      * @param null $location
      * @throws \Exception
      */
-    public function setChromeDirectory($location=null)
+    public function setChromeDirectory($location = null)
     {
-        if(!$location)
+        if (!$location)
         {
             throw new \Exception("No binary Bath Is provided");
         }
+        
         $this->setArgument('user-data-dir',$location);
     }
     /**
@@ -82,12 +86,13 @@ class Chrome
      */
     public function setArgument($argument, $value)
     {
-        $argument=trim($argument);
-        if(!empty($value) && !strstr($argument,'='))
+        $argument = trim($argument);
+        
+        if (!empty($value) && !strstr($argument,'='))
         {
-            $argument.='=';
+            $argument .= '=';
         }
-        $this->arguments[$argument]=trim($value);
+        $this->arguments[$argument] = trim($value);
     }
 
     /**
@@ -109,11 +114,12 @@ class Chrome
      */
     public function setUrl($url=null)
     {
-        if(!$url)
+        if (!$url)
         {
             throw new \Exception('No url provided');
         }
-        $this->url=trim($url);
+        
+        $this->url = trim($url);
     }
 
     /**
@@ -125,19 +131,24 @@ class Chrome
      */
     public function getPdf($pdfPath=null)
     {
-        if($pdfPath && !strstr($pdfPath,".pdf"))
+        if ($pdfPath && !strstr($pdfPath,".pdf"))
         {
-            $pdfPath.=".pdf";
+            $pdfPath .= ".pdf";
         }
-        $pdfName=$this->returnUniqueName("pdf");
-        $printArray=[
+        
+        $pdfName = $this->returnUniqueName("pdf");
+        
+        $printArray = [
             '--print-to-pdf='=>$pdfPath?$pdfPath:$this->outPutDirectory.'/'.$pdfName,
         ];
-        $allArguments=array_merge($printArray,$this->arguments);
-        if(!$this->executeChrome($allArguments))
+        
+        $allArguments = array_merge($printArray,$this->arguments);
+        
+        if (!$this->executeChrome($allArguments))
         {
             throw new \Exception("Some Error Occurred While Getting Pdf");
         }
+        
         return $pdfPath?$pdfPath:$this->outPutDirectory.'/'.$pdfName;
     }
 
@@ -148,21 +159,26 @@ class Chrome
      * @return string
      * @throws \Exception
      */
-    public function getScreenShot($imagePath=null)
+    public function getScreenShot($imagePath = null)
     {
-        if($imagePath && !strstr($imagePath,".jpg") && !strstr($imagePath,".png"))
+        if ($imagePath && !strstr($imagePath,".jpg") && !strstr($imagePath,".png"))
         {
-            $imagePath.=".jpg";
+            $imagePath .= ".jpg";
         }
-        $imageName=$this->returnUniqueName("jpg");
-        $printArray=[
+        
+        $imageName = $this->returnUniqueName("jpg");
+        
+        $printArray = [
             '--screenshot='=>$imagePath?$imagePath:$this->outPutDirectory.'/'.$imageName,
         ];
-        $allArguments=array_merge($printArray,$this->arguments);
-        if(!$this->executeChrome($allArguments))
+        
+        $allArguments = array_merge($printArray,$this->arguments);
+        
+        if (!$this->executeChrome($allArguments))
         {
             throw new \Exception("Some Error Occurred While Getting Image");
         }
+        
         return $imagePath?$imagePath:$this->outPutDirectory.'/'.$imageName;
     }
 
@@ -173,12 +189,13 @@ class Chrome
      */
     public function setOutputDirectory($directory=null)
     {
-        if(!$directory)
+        if (!$directory)
         {
             throw new \Exception('No url provided');
         }
-        $this->outPutDirectory=trim($directory);
-        if(!file_exists($directory))
+        $this->outPutDirectory = trim($directory);
+        
+        if (!file_exists($directory))
         {
             @mkdir($directory);
         }
@@ -195,13 +212,16 @@ class Chrome
         {
             $command->addArg($argument,$value?$value:null);
         }
+        
         $command->addArg($this->url,null);
+        
         if (!$command->execute())
         {
             echo $command->getError().PHP_EOL.'exit Code:'.$command->getExitCode();
             return false;
         }
-        unset($command);
+        
+        unset ($command);
         return true;
     }
 
@@ -213,10 +233,11 @@ class Chrome
      */
     private function UniqueName($fileName)
     {
-        if(file_exists($this->outPutDirectory.'/'.$fileName))
+        if (file_exists($this->outPutDirectory.'/'.$fileName))
         {
             return false;
         }
+        
         return true;
     }
 
@@ -279,10 +300,11 @@ class Chrome
      */
     public function useHtmlFile($file)
     {
-        if(!file_exists($file))
+        if (!file_exists($file))
         {
             throw new \Exception("$file not found");
         }
+        
         $this->setUrl("file://".$file);
     }
 
@@ -293,10 +315,11 @@ class Chrome
      */
     public function useHtml($html=null)
     {
-        if(!$html)
+        if (!$html)
         {
             throw new \Exception("No html provided");
         }
+        
         $this->setUrl('data:text/html,' . rawurlencode($html));
     }
 
@@ -307,7 +330,8 @@ class Chrome
     {
         $command = new Command(trim($this->binaryPath.' --version'));
         $command->execute();
-        if($command->getError() && (!strstr($command->getError(),"Google Chrome") || !strstr($command->getError(),"Chromium")))
+        
+        if ($command->getError() && (!strstr($command->getError(),"Google Chrome") || !strstr($command->getError(),"Chromium")))
         {
             throw new \Exception("there is problem in running provided chrome's binary Error message is :".$command->getError());
         }
@@ -316,10 +340,12 @@ class Chrome
     private function returnUniqueName($extension)
     {
         $uniqueName=md5(time().mt_rand()).'.'.$extension;
-        while(!$this->UniqueName($uniqueName))
+        
+        while (!$this->UniqueName($uniqueName))
         {
-            $uniqueName=rand().$uniqueName;
+            $uniqueName = rand().$uniqueName;
         }
+        
         return $uniqueName;
     }
 
