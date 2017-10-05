@@ -36,7 +36,7 @@ class ChromeTestSuite extends TestCase
     {
         $chrome = new Chrome();
         $chrome->setBinaryPath($this->binaryPath);
-        $this->assertEquals($this->binaryPath,$chrome->getBinaryPath());
+        $this->assertEquals($this->binaryPath, $chrome->getBinaryPath());
     }
 
     public function testSetChromeDirectory()
@@ -52,7 +52,7 @@ class ChromeTestSuite extends TestCase
     public function testSetArgument()
     {
         $chrome = new Chrome;
-        $chrome->setArgument('   test     ','           Nothing         ');
+        $chrome->setArgument('   test     ', '           Nothing         ');
         $this->assertArrayHasKey('test=', $chrome->getArguments());
         $this->assertEquals('Nothing', $chrome->getArguments()['test=']);
     }
@@ -97,8 +97,7 @@ class ChromeTestSuite extends TestCase
      */
     private function deleteFile($file)
     {
-        if (!file_exists($file))
-        {
+        if (!file_exists($file)) {
             return false;
         }
 

@@ -1,8 +1,8 @@
 <?php
 namespace dawood\phpChrome;
 
-use mikehaertl\shellcommand\Command;
 use Exception;
+use mikehaertl\shellcommand\Command;
 
 class Chrome
 {
