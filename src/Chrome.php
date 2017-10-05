@@ -36,7 +36,7 @@ class Chrome
      * @param string $url           The url to convert to a pdf
      * @param string $binaryPath    Location of google-chrome installed on your machine
      */
-    function __construct($url = '', $binaryPath = '')
+    public function __construct($url = '', $binaryPath = '')
     {
         // Set default options
         $this->setArguments([
