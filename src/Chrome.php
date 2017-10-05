@@ -1,9 +1,9 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: dawood ikhlaq <daudmalik06@gmail.com>
- * Date: 7/6/2017
- * Time: 10:53 PM
+/*
+ * This file is part of the PHP ChromeToPdf.
+ *
+ * @author      Dawood Ikhlaq
+ * @copyright   Copyright (c) 2017 PHP ChromeToPdf
  */
 
 namespace dawood\phpChrome;
@@ -92,7 +92,8 @@ class Chrome
 
     /**
      * set provided arguments
-     * @param array $options
+     *
+     * @param array $arguments
      */
     public function setArguments(array $arguments)
     {
@@ -186,7 +187,10 @@ class Chrome
 
     /**
      * execute the chrome using all the provided options
+     *
      * @param array $arguments
+     *
+     * @return bool
      */
     private function executeChrome(array $arguments)
     {

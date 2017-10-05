@@ -1,13 +1,14 @@
 <?php
+/*
+ * This file is part of the PHP ChromeToPdf.
+ *
+ * @author      Dawood Ikhlaq
+ * @copyright   Copyright (c) 2017 PHP ChromeToPdf
+ */
+
 use dawood\phpChrome\Chrome;
 use PHPUnit\Framework\TestCase;
 
-/**
- * Created by PhpStorm.
- * User: dawood Ikhlaq
- * Date: 7/8/2017
- * Time: 6:02 PM
- */
 class ChromeTestSuite extends TestCase
 {
 
@@ -94,7 +95,10 @@ class ChromeTestSuite extends TestCase
 
     /**
      * deletes provided file
+     *
      * @param string $file
+     *
+     * @return bool
      */
     private function deleteFile($file)
     {
