@@ -1,5 +1,10 @@
 <?php
-namespace dawood\phpChrome;
+/*
+ * This file is part of the PHP ChromeToPdf.
+ *
+ * @author      Dawood Ikhlaq
+ * @copyright   Copyright (c) 2017 PHP ChromeToPdf
+ */
 
 use Exception;
 use mikehaertl\shellcommand\Command;
@@ -94,9 +99,9 @@ class Chrome
     }
 
     /**
-     * Set a list of arguments
+     * set provided arguments
      *
-     * @param array $options
+     * @param array $arguments
      */
     public function setArguments(array $arguments)
     {
@@ -187,6 +192,8 @@ class Chrome
      * Execute Chrome using all provided arguments
      *
      * @param array $arguments
+     *
+     * @return bool
      */
     private function executeChrome(array $arguments)
     {
