@@ -176,8 +176,8 @@ print "screenShot successfully generated :".$chrome->getScreenShot("/tmp/hello/t
 
 ## Setting options
 
-The `google-chrome` shell command accepts different types of options, 
-for the complete list of options you can visit
+The `google-chrome` shell command accepts different types of arguments, 
+for the complete list of arguments you can visit
 https://peter.sh/experiments/chromium-command-line-switches/
 
 
@@ -193,7 +193,7 @@ https://peter.sh/experiments/chromium-command-line-switches/
  constructor. Default arguments like
  `headless, disable-gpu` are necessary for google-chrome to work on cli
  * `setBinaryPath` Accepts a binary path and sets it for you
- * `setArguments` sets options of google-chrome, it accepts an array of options in a format
+ * `setArguments` sets arguments for google-chrome, it accepts an array of arguments in a format
  ```
  [
     $argument1=>$value1,
@@ -203,7 +203,7 @@ https://peter.sh/experiments/chromium-command-line-switches/
 If your argument does not have values like `--headless` you can pass an empty value
  e.g
  `[--headless=>'']`
-* `setArgument` to set options for google-chrome. It accepts two parameters `$argument, $value`
+* `setArgument` to set arguments for google-chrome. It accepts two parameters `$argument, $value`
  if your argument does not have a value like `--headless` you can pass an empty value e.g
  `setArgument('--headless','')`
 
