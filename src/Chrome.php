@@ -38,22 +38,23 @@ class Chrome
     /**
      * Chrome constructor.
      *
-     * @param string $url        The url to convert to a pdf
-     * @param string $binaryPath Location of google-chrome installed on your machine
+     * If you don't know the Executable Path, launch Chrome and visit chrome://version.
+     *
+     * @param string $url             The url to convert to a pdf
+     * @param string $binaryPath      Location of google-chrome installed on your machine
+     * @param string $outputDirectory Directory to save the output
      */
-    public function __construct($url = '', $binaryPath = '')
+    public function __construct($url = '', $binaryPath = '', $outputDirectory = null)
     {
         // Set default options
-        $this->setArguments(
-            [
+        $this->setArguments([
             '--headless' => '',
             '--disable-gpu' => '',
             '--incognito' => '',
             '--enable-viewport' => '',
-            ]
-        );
+        ]);
 
-        $this->setOutputDirectory(sys_get_temp_dir());
+        $this->setOutputDirectory($outputDirectory ?: sys_get_temp_dir());
 
         if ($binaryPath) {
             $this->setBinaryPath($binaryPath);
