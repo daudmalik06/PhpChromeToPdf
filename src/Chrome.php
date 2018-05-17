@@ -216,7 +216,7 @@ class Chrome
     {
         $this->command = new Command($this->binaryPath);
         foreach ($arguments as $argument => $value) {
-            $this->command->addArg($argument, $value ? $value : null);
+            $this->command->addArg($argument, $value ?: null);
         }
 
         $this->command->addArg($this->url, null);
@@ -239,9 +239,9 @@ class Chrome
      *
      * @return bool
      */
-    private function uniqueName($fileName)
+    private function isUniqueName($fileName)
     {
-        return !file_exists($this->outputDirectory . '/' . $fileName);
+        return !file_exists($this->outputDirectory . DIRECTORY_SEPARATOR . $fileName);
     }
 
     /**
@@ -313,10 +313,10 @@ class Chrome
     private function getUniqueName($extension)
     {
         do {
-            $uniqueName = md5(time() . mt_rand()) . '.' . $extension;
-        } while (!$this->uniqueName($uniqueName));
+            $name = md5(time() . mt_rand()) . '.' . $extension;
+        } while (!$this->isUniqueName($name));
 
-        return $uniqueName;
+        return $name;
     }
 
     /**
