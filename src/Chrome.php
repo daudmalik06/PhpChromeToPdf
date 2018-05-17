@@ -109,7 +109,7 @@ class Chrome
     /**
      * Set a list of arguments.
      *
-     * @param array $options
+     * @param array $arguments
      */
     public function setArguments(array $arguments)
     {
