@@ -95,11 +95,15 @@ class Chrome
     public function setArgument($argument, $value)
     {
         $argument = trim($argument);
-        if (!empty($value) && !strstr($argument, '=')) {
+        $value = trim($value);
+        if (!$argument) {
+            return;
+        }
+        if ($value) {
             $argument .= '=';
         }
 
-        $this->arguments[$argument] = trim($value);
+        $this->arguments[$argument] = $value;
     }
 
     /**
