@@ -36,6 +36,13 @@ class Chrome
     private $outputDirectory;
 
     /**
+     * The command being executed.
+     *
+     * @var mikehaertl\shellcommand\Command;
+     */
+    private $command;
+
+    /**
      * Chrome constructor.
      *
      * If you don't know the Executable Path, launch Chrome and visit chrome://version.
@@ -139,19 +146,19 @@ class Chrome
      */
     public function getPdf($pdfPath = null)
     {
-        if ($pdfPath && !strstr($pdfPath, '.pdf')) {
+        if ($pdfPath && !preg_match('/\.pdf$/', $pdfPath)) {
             $pdfPath .= '.pdf';
         }
         $pdfName = $this->getUniqueName('pdf');
 
-        $location = $pdfPath ?: $this->outputDirectory . '/' . $pdfName;
+        $location = $pdfPath ?: $this->outputDirectory . DIRECTORY_SEPARATOR . $pdfName;
         $printArray = [
             '--print-to-pdf=' => $location,
         ];
 
         $allArguments = array_merge($printArray, $this->arguments);
         if (!$this->executeChrome($allArguments)) {
-            throw new Exception('Some Error Occurred While Getting Pdf');
+            throw new Exception('Error #' . $this->command->getExitCode() . ' while creating PDF: ' . $this->command->getError());
         }
 
         return $location;
@@ -207,16 +214,16 @@ class Chrome
      */
     private function executeChrome(array $arguments)
     {
-        $command = new Command($this->binaryPath);
+        $this->command = new Command($this->binaryPath);
         foreach ($arguments as $argument => $value) {
-            $command->addArg($argument, $value ? $value : null);
+            $this->command->addArg($argument, $value ? $value : null);
         }
 
-        $command->addArg($this->url, null);
+        $this->command->addArg($this->url, null);
 
-        if (!$command->execute()) {
-            echo $command->getError() . PHP_EOL;
-            echo 'Exit code: ' . $command->getExitCode() . PHP_EOL;
+        if (!$this->command->execute()) {
+            echo $this->command->getError() . PHP_EOL;
+            echo 'Exit code: ' . $this->command->getExitCode() . PHP_EOL;
 
             return false;
         }
