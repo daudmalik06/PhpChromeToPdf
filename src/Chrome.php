@@ -1,4 +1,5 @@
 <?php
+
 namespace dawood\phpChrome;
 
 use Exception;
@@ -7,44 +8,50 @@ use mikehaertl\shellcommand\Command;
 class Chrome
 {
     /**
-     * The location of the Chrome binary to be used
+     * The location of the Chrome binary to be used.
+     *
      * @var string
      */
     private $binaryPath;
 
     /**
-     * A list of arguments to execute Chrome with
+     * A list of arguments to execute Chrome with.
+     *
      * @var string
      */
     private $arguments;
 
     /**
-     * The url that should be converted to a PDF
+     * The url that should be converted to a PDF.
+     *
      * @var string
      */
     private $url;
 
     /**
-     * The directory to be used as output
+     * The directory to be used as output.
+     *
      * @var string
      */
     private $outputDirectory;
 
     /**
-     * Chrome constructor
+     * Chrome constructor.
      *
-     * @param string $url           The url to convert to a pdf
-     * @param string $binaryPath    Location of google-chrome installed on your machine
+     * @param string $url        The url to convert to a pdf
+     * @param string $binaryPath Location of google-chrome installed on your machine
      */
     public function __construct($url = '', $binaryPath = '')
     {
         // Set default options
-        $this->setArguments([
-            '--headless'=>'',
-            '--disable-gpu'=>'',
-            '--incognito'=>'',
-            '--enable-viewport'=>'',
-        ]);
+        $this->setArguments(
+            [
+            '--headless' => '',
+            '--disable-gpu' => '',
+            '--incognito' => '',
+            '--enable-viewport' => '',
+            ]
+        );
 
         $this->setOutputDirectory(sys_get_temp_dir());
 
@@ -58,7 +65,7 @@ class Chrome
     }
 
     /**
-     * Set the binary to use for executing Chrome
+     * Set the binary to use for executing Chrome.
      *
      * @param string $binaryPath
      */
@@ -69,16 +76,17 @@ class Chrome
     }
 
     /**
-     * Set the location of the browser's user profile
+     * Set the location of the browser's user profile.
      *
      * @param string $location
-    */
+     */
     public function setChromeDirectory($location)
     {
         $this->setArgument('user-data-dir', $location);
     }
+
     /**
-     * Add a single provided argument to the arguments to run Chrome with
+     * Add a single provided argument to the arguments to run Chrome with.
      *
      * @param string $argument
      * @param string $value
@@ -94,7 +102,7 @@ class Chrome
     }
 
     /**
-     * Set a list of arguments
+     * Set a list of arguments.
      *
      * @param array $options
      */
@@ -106,7 +114,7 @@ class Chrome
     }
 
     /**
-     * Set the target URL
+     * Set the target URL.
      *
      * @param string $url
      */
@@ -116,10 +124,12 @@ class Chrome
     }
 
     /**
-     * Convert the provided URL to a PDF and return its location
+     * Convert the provided URL to a PDF and return its location.
      *
-     * @param null|string $pdfPath   The path to the PDF
+     * @param null|string $pdfPath The path to the PDF
+     *
      * @return string
+     *
      * @throws Exception
      */
     public function getPdf($pdfPath = null)
@@ -143,11 +153,13 @@ class Chrome
     }
 
     /**
-     * Convert the provided url to image and return the image's location
+     * Convert the provided url to image and return the image's location.
      *
      * @param null|string $imagePath desired location and file to save the screenshot file
-     * e.g /home/my.jpg
+     *                               e.g /home/my.jpg
+     *
      * @return string
+     *
      * @throws Exception
      */
     public function getScreenShot($imagePath = null)
@@ -170,7 +182,7 @@ class Chrome
     }
 
     /**
-     * Set the output directory for PDF and screenshots
+     * Set the output directory for PDF and screenshots.
      *
      * @param string $directory
      */
@@ -184,7 +196,7 @@ class Chrome
     }
 
     /**
-     * Execute Chrome using all provided arguments
+     * Execute Chrome using all provided arguments.
      *
      * @param array $arguments
      */
@@ -200,6 +212,7 @@ class Chrome
         if (!$command->execute()) {
             echo $command->getError() . PHP_EOL;
             echo 'Exit code: ' . $command->getExitCode() . PHP_EOL;
+
             return false;
         }
 
@@ -208,9 +221,10 @@ class Chrome
 
     /**
      * Check if the provided file is unique and doesn't already exist in the
-     * output directory
+     * output directory.
      *
      * @param string $fileName
+     *
      * @return bool
      */
     private function uniqueName($fileName)
@@ -219,10 +233,10 @@ class Chrome
     }
 
     /**
-     * Set the size of  the Chrome window
+     * Set the size of  the Chrome window.
      *
-     * @param integer $width
-     * @param integer $height
+     * @param int $width
+     * @param int $height
      */
     public function setWindowSize($width, $height)
     {
@@ -230,7 +244,7 @@ class Chrome
     }
 
     /**
-     * Sets a mobile user agent for Chrome
+     * Sets a mobile user agent for Chrome.
      */
     public function useMobileScreen()
     {
@@ -238,9 +252,10 @@ class Chrome
     }
 
     /**
-     * Set the provided filename as the target url using the file:// protocol
+     * Set the provided filename as the target url using the file:// protocol.
      *
      * @param string $file
+     *
      * @throws Exception if file not found
      */
     public function useHtmlFile($file)
@@ -253,7 +268,7 @@ class Chrome
     }
 
     /**
-     * Allow using html code to be converted to pdf or to take screenshot
+     * Allow using html code to be converted to pdf or to take screenshot.
      *
      * @param string $html
      */
@@ -263,7 +278,7 @@ class Chrome
     }
 
     /**
-     * Throws an exception if the provided chrome binary is not available
+     * Throws an exception if the provided chrome binary is not available.
      *
      * @throws Exception
      */
@@ -279,7 +294,7 @@ class Chrome
     }
 
     /**
-     * Returns a unique filename with the given extension
+     * Returns a unique filename with the given extension.
      *
      * @return string
      */
@@ -293,7 +308,7 @@ class Chrome
     }
 
     /**
-     * Gets the Url
+     * Gets the Url.
      *
      * @return string
      */
@@ -303,7 +318,7 @@ class Chrome
     }
 
     /**
-     * Get the path of the currently used binary
+     * Get the path of the currently used binary.
      *
      * @return string
      */
@@ -313,7 +328,7 @@ class Chrome
     }
 
     /**
-     * Gets a list of all arguments that Chrome is launched with
+     * Gets a list of all arguments that Chrome is launched with.
      *
      * @return array
      */
@@ -323,7 +338,7 @@ class Chrome
     }
 
     /**
-     * Get the output directory to be used by Chrome
+     * Get the output directory to be used by Chrome.
      *
      * @return string
      */
