@@ -1,4 +1,10 @@
 <?php
+/*
+ * This file is part of PhpChromeToPdf.
+ *
+ * @author      Dawood Ikhlaq
+ * @copyright   Copyright (c) 2017 PhpChromeToPdf
+ */
 
 namespace dawood\phpChrome;
 
@@ -158,7 +164,8 @@ class Chrome
 
         $allArguments = array_merge($printArray, $this->arguments);
         if (!$this->executeChrome($allArguments)) {
-            throw new Exception('Error #' . $this->command->getExitCode() . ' while creating PDF: ' . $this->command->getError());
+            throw new Exception('Error #' . $this->command->getExitCode() . ' while creating PDF: '
+                . $this->command->getError());
         }
 
         return $location;
@@ -211,6 +218,8 @@ class Chrome
      * Execute Chrome using all provided arguments.
      *
      * @param array $arguments
+     *
+     * @return bool
      */
     private function executeChrome(array $arguments)
     {
