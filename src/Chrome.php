@@ -112,7 +112,7 @@ class Chrome
         if (!$argument) {
             return;
         }
-        if ($value) {
+        if ($value && !preg_match('/=$/', $argument)) {
             $argument .= '=';
         }
 
