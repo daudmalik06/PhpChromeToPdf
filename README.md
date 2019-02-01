@@ -12,8 +12,8 @@ must be installed and working on your system.** See the section below for detail
 
 
 ## Note
-Because of my busy schedule i have to **abondon** this project, current release is working well if followed the instruction correctly.
-In case you are stuck and want **paid assisstance**, feel free to message me on https://www.devnack.com/ 
+Because of my busy schedule i have to **abandon** this project, current release is working well if followed the instruction correctly.
+In case you are stuck and want **paid assistance**, feel free to message me on https://www.devnack.com/ 
 
 
 ## History
