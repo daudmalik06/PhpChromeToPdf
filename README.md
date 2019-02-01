@@ -11,6 +11,10 @@ PHP ChromeToPdf provides a simple and clean interface to ease PDF and image crea
 must be installed and working on your system.** See the section below for details.
 
 
+## Note
+Because of my busy schedule i have to **abondon** this project, current release is working well if followed the instruction correctly.
+In case you are stuck and want **paid assisstance**, feel free to message me on https://www.devnack.com/ 
+
 
 ## History
 Every time i had convert url to pdf or to take screenshot of some url
@@ -47,7 +51,7 @@ There are several examples provided in examples folder too
 
 ```php
 
-use dawood\phpChrome\Chrome;
+use dawood\phpChrome\Chrome; 
 
 
 $chrome=new Chrome('https://youtube.com','/usr/bin/google-chrome');
