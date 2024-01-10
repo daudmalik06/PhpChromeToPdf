@@ -27,7 +27,16 @@ by using chrome results i achieved following results.
 **in-fact painless conversion**
 
 
-## Installation
+## Installation ( Laravel )
+This package supports Laravel. Install it in a Laravel application as follows:
+
+```
+composer require dawood/phpchromepdf
+```
+
+done.
+
+## Installation ( Simple PHP App )
 
 Install the package through [composer](http://getcomposer.org):
 
