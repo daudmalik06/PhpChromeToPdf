@@ -11,11 +11,6 @@ PHP ChromeToPdf provides a simple and clean interface to ease PDF and image crea
 must be installed and working on your system.** See the section below for details.
 
 
-## Note
-Because of my busy schedule i have to **abandon** this project, current release is working well if followed the instruction correctly.
-In case you are stuck and want **paid assistance**, feel free to message me on https://www.devnack.com/ 
-
-
 ## History
 Every time i had convert url to pdf or to take screenshot of some url
 i had to install several libraries , i know there are very good libraries available
